@@ -49,17 +49,12 @@ function updateCartUI() {
 }
 
 
-
-
-
-
 function removeFromCart(id) {
     cart = cart.filter(item => item.id !== id);
     updateCartUI();
 }
 
 
-// Increase quantity
 function increaseQuantity(id) {
     const item = cart.find(item => item.id === id);
     if (item) {
@@ -68,7 +63,7 @@ function increaseQuantity(id) {
     updateCartUI();
 }
 
-// Decrease quantity
+
 function decreaseQuantity(id) {
     const item = cart.find(item => item.id === id);
     if (item && item.quantity > 1) {
