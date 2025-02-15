@@ -1,4 +1,10 @@
-let cart = [];
+function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+updateCartUI();
+
 
 function addToCart(id, title, price, image) {
     const existingItem = cart.find(item => item.id === id);
@@ -7,8 +13,10 @@ function addToCart(id, title, price, image) {
     } else {
         cart.push({ id, title, price, image, quantity: 1 });
     }
+    saveCart();
     updateCartUI();
 }
+
 
 function updateCartUI() {
     const cartItemsContainer = document.getElementById("cart-items");
@@ -21,10 +29,17 @@ function updateCartUI() {
     cart.forEach(item => {
         total += item.price * item.quantity;
         const cartItem = document.createElement("div");
-        cartItem.innerHTML = `
-            <img src="${item.image}" width="50">
-            <p>${item.title} - $${item.price} x ${item.quantity}</p>
-            <button onclick="removeFromCart(${item.id})">Remove</button>
+        cartItem.innerHTML = `            
+            <div id="main">
+                <img src="${item.image}" width="50">
+                <p>${item.title} - $${item.price} x ${item.quantity}</p>
+                <button id="extra" onclick="removeFromCart(${item.id})">Remove</button>
+                <div class="quantity-controls">
+                    <button onclick="decreaseQuantity(${item.id})">-</button>
+                    <span>${item.quantity}</span>
+                    <button onclick="increaseQuantity(${item.id})">+</button>
+                </div>  
+            </div>
         `;
         cartItemsContainer.appendChild(cartItem);
     });
@@ -33,12 +48,39 @@ function updateCartUI() {
     totalPriceElement.textContent = total.toFixed(2);
 }
 
+
+
+
+
+
 function removeFromCart(id) {
     cart = cart.filter(item => item.id !== id);
     updateCartUI();
 }
 
+
+// Increase quantity
+function increaseQuantity(id) {
+    const item = cart.find(item => item.id === id);
+    if (item) {
+        item.quantity += 1;
+    }
+    updateCartUI();
+}
+
+// Decrease quantity
+function decreaseQuantity(id) {
+    const item = cart.find(item => item.id === id);
+    if (item && item.quantity > 1) {
+        item.quantity -= 1;
+    }
+    updateCartUI();
+}
+
+
+
 document.getElementById("clear-cart").addEventListener("click", () => {
     cart = [];
+    saveCart();
     updateCartUI();
 });

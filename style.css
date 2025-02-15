@@ -20,6 +20,23 @@ header {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Close button style */
+.close-cart-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #e3002d;
+}
+
+.close-cart-btn:hover {
+  color: #333;
+}
+
+
 
 nav ul {
   list-style: none;
@@ -95,7 +112,7 @@ nav ul li a {
   position: fixed;
   right: 0;
   top: 0;
-  width: 300px;
+  width: 45%;
   background: white;
   height: 100vh;
   padding: 20px;
@@ -162,13 +179,72 @@ footer p {
   opacity: 0.8;
 }
 
+#cart-items div {
+  display: flex;
+  align-items: center;
+}
+
+#main{
+  border: 1px solid rgb(231, 231, 231);
+  padding: 10px;
+  margin-top: 15px;
+  width: 100%;
+}
+
+#cart-items img {
+  margin-right: 10px;
+}
+
+#cart-items p {
+  margin: 0;
+  flex-grow: 1;
+}
+
+#cart-items button {
+  background: #E3002D;
+  font-size: 12px;
+}
+
+#extra{
+  margin: 0 10px;
+  font-size: 10px;
+}
+
+
+.quantity-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quantity-controls button {
+  padding: 6px 12px;
+  font-size: 16px;
+  background-color: #075DA8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.quantity-controls button:hover {
+  background-color: #0056b3;
+}
+
+.quantity-controls span {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+
+
 @media (max-width: 576px){
   header{
     flex-direction: column;
   }
 
   nav ul li a, .cart-icon{
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .cart-icon{
@@ -178,4 +254,10 @@ footer p {
   .logo img{
     width: 150px;
   }
+
+  #cart-container{
+    width: 95%;
+  }
+
+  
 }
